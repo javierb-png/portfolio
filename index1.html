@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Javier Bonini | Ingeniero Electromecánico</title>
+<meta name="description" content="Portfolio de Javier Bonini: ingeniería de sistemas mecánicos para vehículos espaciales, materiales compuestos, diseño y simulación.">
+<style>
+  :root{
+    --bg:#0b1220; --card:#121b2e; --line:#223049; --text:#e6ecf5; --muted:#9fb0c8; --accent:#4da3ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header.nav{position:sticky;top:0;background:rgba(11,18,32,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:10}
+  .nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+  .nav strong{font-size:1rem}
+  .nav nav a{margin-left:18px;color:var(--muted);font-size:.92rem}
+  .nav nav a:hover{color:var(--text);text-decoration:none}
+  .hero{padding:80px 0 56px}
+  .hero h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15}
+  .hero p.role{color:var(--accent);font-weight:600;margin-top:10px}
+  .hero p.lead{color:var(--muted);max-width:640px;margin-top:18px}
+  .btns{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:10px 18px;border-radius:8px;border:1px solid var(--accent);font-weight:600;font-size:.95rem}
+  .btn.primary{background:var(--accent);color:#06101f}
+  .btn:hover{text-decoration:none;opacity:.9}
+  section{padding:48px 0;border-top:1px solid var(--line)}
+  h2{font-size:1.5rem;margin-bottom:22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  
+  /* Tarjetas de proyectos interactiva */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform 0.2s ease, border-color 0.2s ease}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .card img{width:100%;height:170px;object-fit:cover;display:block;background:#0e1626}
+  .card .body{padding:16px 18px 20px}
+  .card h3{font-size:1.05rem;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.92rem}
+  .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:.75rem;border:1px solid var(--line);color:var(--muted);padding:2px 8px;border-radius:999px}
+  .about p{color:var(--muted);max-width:720px;margin-bottom:14px}
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .skills h3{font-size:.95rem;margin-bottom:8px;color:var(--accent)}
+  .skills ul{list-style:none;color:var(--muted);font-size:.93rem}
+  .skills li{padding:2px 0}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.88rem}
+
+  /* Modal de ampliación */
+  .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(6,16,31,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s ease;z-index:1000;padding:20px}
+  .modal-overlay.active{opacity:1;visibility:visible}
+  .modal-content{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;position:relative;padding:28px;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+  .modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:2rem;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px;transition:color .2s}
+  .modal-close:hover{color:var(--text)}
+  .modal-main-wrapper img{width:100%;max-height:380px;object-fit:contain;background:#080d17;border-radius:8px;border:1px solid var(--line);display:block;margin:0 auto}
+  .modal-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:6px}
+  .thumb-img{width:76px;height:56px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent;opacity:.6;transition:opacity .2s, border-color .2s;flex-shrink:0}
+  .thumb-img:hover,.thumb-img.active{opacity:1;border-color:var(--accent)}
+  .modal-body{margin-top:20px}
+  .modal-body h3{font-size:1.35rem;margin-bottom:12px;color:var(--text)}
+  .modal-body p{color:var(--muted);font-size:.96rem;line-height:1.65;white-space:pre-line}
+  .modal-body .tags{margin-top:16px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <strong>Javier Bonini</strong>
+    <nav>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1>Javier Bonini</h1>
+    <p class="role">Ingeniero Electromecánico · Sistemas Mecánicos para Vehículos Espaciales</p>
+    <p class="lead">Ingeniero Electromecánico (UNLP) cursando Ingeniería Mecánica, con posgrado en Diseño y Construcción de Estructuras de Vehículos Espaciales. Me interesa la industria aeroespacial: estructuras, interfaces mecánicas, presupuestos técnicos y materiales compuestos.</p>
+    <div class="btns">
+      <a class="btn primary" href="cv.pdf">Descargar CV (PDF)</a>
+      <a class="btn" href="https://linkedin.com/in/javier-bonini">LinkedIn</a>
+      <a class="btn" href="mailto:javierbonini@gmail.com">Escribime</a>
+    </div>
+  </div>
+
+  <section id="sobre-mi">
+    <div class="wrap about">
+      <h2>Sobre mí</h2>
+      <p>Ingeniero Electromecánico por la Universidad Nacional de La Plata (promedio 8,2/10) y estudiante de 5.º año de Ingeniería Mecánica. Estoy cursando también un posgrado en Fluidodinámica Computacional con Ansys y MATLAB.</p>
+      <p>En el posgrado de estructuras espaciales participé en el diseño de la arquitectura de un lanzador orbital y diseñé el sistema de retención y liberación (HDRM) trabajando con ICDs, requerimientos, márgenes y contingencias. En el GEMA (UNLP) trabajo con materiales compuestos: ensayos, laminación, reparaciones y validación geométrica de piezas.</p>
+      <p>Inglés bilingüe (First Certificate in English, Cambridge).</p>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <h2>Proyectos</h2>
+      <div class="grid">
+
+        <!-- Ejemplo con varias imágenes y descripción detallada usando data-attributes -->
+        <article class="card" 
+                 data-images="img/lanzador.jpg, img/lanzador-2.jpg, img/lanzador-3.jpg"
+                 data-description="Diseño en equipo de la arquitectura y magnitudes principales: GLOW, ΔV, relación L/D, aceleración, diagramas M-N-Q y presupuestos de masa.
+
+Se analizó la distribución de cargas estructurales, la configuración multietapa y el dimensionamiento preliminar de los tanques de propelente conforme a normas aeroespaciales.">
+          <img src="img/lanzador.jpg" alt="Arquitectura del lanzador orbital" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Arquitectura de un lanzador orbital</h3>
+            <p>Diseño en equipo de la arquitectura y magnitudes principales: GLOW, ΔV, relación L/D, aceleración, diagramas M-N-Q y presupuestos de masa.</p>
+            <div class="tags"><span class="tag">Posgrado UNLP</span><span class="tag">Presupuestos</span><span class="tag">Sistemas</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/hdrm.jpg, img/hdrm-2.jpg"
+                 data-description="Diseño y documentación individual, con foco en la interfaz mecánica y eléctrica con el resto de los subsistemas. Trabajo con ICDs, requerimientos de misión y de subsistema, márgenes y contingencias. Incluye estimación de costos y procesos de fabricación.">
+          <img src="img/hdrm.jpg" alt="Sistema de retención y liberación HDRM" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Sistema de retención y liberación (HDRM)</h3>
+            <p>Diseño y documentación individual, con foco en la interfaz mecánica y eléctrica con el resto de los subsistemas. Trabajo con ICDs, requerimientos de misión y de subsistema, márgenes y contingencias. Incluye estimación de costos y procesos de fabricación.</p>
+            <div class="tags"><span class="tag">Posgrado UNLP</span><span class="tag">ICD</span><span class="tag">Interfaces</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/gema.jpg, img/gema-2.jpg"
+                 data-description="Validación de piezas de montaje de una antena de material compuesto comparando geometría real vs. CAD, planillas de control, mejoras en secuencias de ensamblaje, ensayos mecánicos, laminación manual y al vacío, y reparaciones con fibra de carbono y de vidrio.">
+          <img src="img/gema.jpg" alt="Trabajo con materiales compuestos en GEMA" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Materiales compuestos en GEMA (UNLP)</h3>
+            <p>Validación de piezas de montaje de una antena de material compuesto comparando geometría real vs. CAD, planillas de control, mejoras en secuencias de ensamblaje, ensayos mecánicos, laminación manual y al vacío, y reparaciones con fibra de carbono y de vidrio.</p>
+            <div class="tags"><span class="tag">SolidWorks</span><span class="tag">Compuestos</span><span class="tag">Ensayos</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/silla.jpg"
+                 data-description="Variante mecánica y eléctrica. Diseño de las sillas y de la nave industrial para su producción, cálculo de estabilidad, selección de materiales, modelado 3D del ensamble con validación estructural y servicios auxiliares de la fábrica.">
+          <img src="img/silla.jpg" alt="Silla de ruedas bipedestadora" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Proyecto final: silla de ruedas bipedestadora</h3>
+            <p>Variante mecánica y eléctrica. Diseño de las sillas y de la nave industrial para su producción, cálculo de estabilidad, selección de materiales, modelado 3D del ensamble con validación estructural y servicios auxiliares de la fábrica.</p>
+            <div class="tags"><span class="tag">Diseño 3D</span><span class="tag">Estabilidad</span><span class="tag">Producción</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/biela-manivela.jpg"
+                 data-description="Modelado 3D, ensamble cinemático y simulación de esfuerzos por elementos finitos.">
+          <img src="img/biela-manivela.jpg" alt="Mecanismo biela-manivela" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Mecanismo biela-manivela</h3>
+            <p>Modelado 3D, ensamble cinemático y simulación de esfuerzos por elementos finitos.</p>
+            <div class="tags"><span class="tag">CATIA</span><span class="tag">FEM</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/calor-2d.jpg"
+                 data-description="Solución de la ecuación de calor por diferencias finitas con visualización animada de resultados.">
+          <img src="img/calor-2d.jpg" alt="Transferencia de calor 2D" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Transferencia de calor 2D</h3>
+            <p>Solución de la ecuación de calor por diferencias finitas con visualización animada de resultados.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Diferencias finitas</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/dinamica-vehicular.jpg"
+                 data-description="Cálculo de transferencia de peso en frenado y aceleración a partir de la geometría y los parámetros del vehículo.">
+          <img src="img/dinamica-vehicular.jpg" alt="Dinámica vehicular" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Dinámica vehicular</h3>
+            <p>Cálculo de transferencia de peso en frenado y aceleración a partir de la geometría y los parámetros del vehículo.</p>
+            <div class="tags"><span class="tag">Mecánica</span><span class="tag">Cálculo</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/linea-132kv.jpg"
+                 data-description="Evaluación climática, curvas de tendido y verificación mecánica del conductor; dimensionado de cadena de aisladores, morsetería y distancias eléctricas; cálculo mecánico estructural.">
+          <img src="img/linea-132kv.jpg" alt="Línea y torre de transmisión 132 kV" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Línea y torre de transmisión 132 kV</h3>
+            <p>Evaluación climática, curvas de tendido y verificación mecánica del conductor; dimensionado de cadena de aisladores, morsetería y distancias eléctricas; cálculo mecánico estructural.</p>
+            <div class="tags"><span class="tag">Estructuras</span><span class="tag">Sistemas eléctricos</span></div>
+          </div>
+        </article>
+
+        <article class="card"
+                 data-images="img/fotovoltaico.jpg"
+                 data-description="Diagrama unifilar y planos de planta en AutoCAD; dimensionado de la planta, análisis de recurso solar, relevamiento energético y evaluación de costos.">
+          <img src="img/fotovoltaico.jpg" alt="Sistema fotovoltaico" onerror="this.style.display='none'">
+          <div class="body">
+            <h3>Sistema fotovoltaico</h3>
+            <p>Diagrama unifilar y planos de planta en AutoCAD; dimensionado de la planta, análisis de recurso solar, relevamiento energético y evaluación de costos.</p>
+            <div class="tags"><span class="tag">AutoCAD</span><span class="tag">Energía</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <h2>Habilidades</h2>
+      <div class="skills">
+        <div>
+          <h3>Software</h3>
+          <ul><li>SolidWorks, CATIA, AutoCAD</li><li>Ansys</li><li>Python, MATLAB</li><li>CadeSimu, FluidSim</li></ul>
+        </div>
+        <div>
+          <h3>Ingeniería</h3>
+          <ul><li>Requerimientos e ICDs</li><li>Presupuestos, márgenes y contingencias</li><li>Elementos finitos y CFD</li><li>Materiales compuestos y ensayos</li></ul>
+        </div>
+        <div>
+          <h3>Idiomas</h3>
+          <ul><li>Inglés: bilingüe (FCE)</li><li>Español: nativo</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap about">
+      <h2>Contacto</h2>
+      <p><a href="mailto:javierbonini@gmail.com">javierbonini@gmail.com</a> · +54 221 679-4966 · <a href="https://linkedin.com/in/javier-bonini">linkedin.com/in/javier-bonini</a></p>
+    </div>
+  </section>
+</main>
+
+<!-- Estructura de la ventana Modal -->
+<div class="modal-overlay" id="project-modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
+    <div id="modal-gallery"></div>
+    <div class="modal-body">
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+      <div id="modal-tags" class="tags"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">© Javier Bonini</div>
+</footer>
+
+<script>
+  const modal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalGallery = document.getElementById('modal-gallery');
+  const modalTags = document.getElementById('modal-tags');
+  const closeModalBtn = document.getElementById('modal-close');
+
+  let currentImages = [];
+
+  function setMainImage(index) {
+    const mainImg = document.getElementById('modal-main-img');
+    if (mainImg && currentImages[index]) {
+      mainImg.src = currentImages[index];
+    }
+    document.querySelectorAll('.thumb-img').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === index);
+    });
+  }
+
+  function openModal(card) {
+    const title = card.dataset.title || card.querySelector('h3').textContent;
+    const desc = card.dataset.description || card.querySelector('p').textContent;
+    const rawImages = card.dataset.images;
+    const defaultImg = card.querySelector('img') ? card.querySelector('img').getAttribute('src') : '';
+
+    currentImages = rawImages 
+      ? rawImages.split(',').map(s => s.trim()).filter(Boolean)
+      : (defaultImg ? [defaultImg] : []);
+
+    modalTitle.textContent = title;
+    modalDesc.textContent = desc;
+
+    if (currentImages.length > 0) {
+      let thumbsHTML = '';
+      if (currentImages.length > 1) {
+        thumbsHTML = `<div class="modal-thumbs">` +
+          currentImages.map((img, i) => `
+            <img src="${img}" class="thumb-img ${i === 0 ? 'active' : ''}" onclick="setMainImage(${i})" alt="Vista previa ${i + 1}" onerror="this.style.display='none'">
+          `).join('') +
+          `</div>`;
+      }
+
+      modalGallery.innerHTML = `
+        <div class="modal-main-wrapper">
+          <img id="modal-main-img" src="${currentImages[0]}" alt="${title}">
+        </div>
+        ${thumbsHTML}
+      `;
+    } else {
+      modalGallery.innerHTML = '';
+    }
+
+    const tagsContainer = card.querySelector('.tags');
+    modalTags.innerHTML = tagsContainer ? tagsContainer.innerHTML : '';
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+  });
+
+  closeModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+</script>
+
+</body>
+</html>
